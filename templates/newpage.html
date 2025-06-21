@@ -1,0 +1,51 @@
+<!-- newpage.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Choose Option - AgriSat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/newstyle.css') }}">
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='Img/logo.png') }}" alt="AgriSat Logo" class="logo">
+    </header>
+
+    <main>
+        <h1>Choose Your Option</h1>
+        <div class="card-container">
+            <div class="card">
+                <h2>Important Class</h2>
+                <p>
+                    Accurately detect the dominant crop in an image to streamline classification and improve clarity.
+                </p>
+                <a href="{{ url_for('important_class') }}" class="btn">Get Started</a>
+            </div>
+
+            <div class="card">
+                <h2>Segment & Classify Image</h2>
+                <p>
+                    Dividing the images into agricultural and non-agricultural areas, type RGB
+                </p>
+                <a href="{{ url_for('segment') }}" class="btn">Get Started</a>
+            </div>
+
+            <div class="card">
+                <h2>Spectral Index Analysis</h2>
+                <p>
+                    Measure plant health using NDVI and other vegetation indices for effective crop monitoring.
+                </p>
+                <a href="{{ url_for('analyse_page') }}" class="btn">Get Started</a>
+            </div>
+
+            <div class="card">
+                <h2>Classify Crop from Image</h2>
+                <p>
+                    Automatically identify suitable crops using Sentinel-2 indices like NDVI, GNDVI, NDRE, and NDWI.
+                </p>
+                <a href="{{ url_for('classify_crop') }}" class="btn">Get Started</a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

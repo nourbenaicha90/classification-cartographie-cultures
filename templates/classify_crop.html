@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Classify Crop - AgriSat</title>
+    <style>
+        body.backgroundCardImportClass {
+            background-image: url('/static/Img/img_bg.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+          
+            font-family: 'Segoe UI', sans-serif;
+            color: #fff;
+        }
+
+      
+        h1{
+                color: #0da62c;
+                font-size: 32px;
+        }
+        form {
+            margin-top: 20px;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        input[type="file"] {
+            padding: 8px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 4px 0;
+        }
+
+        .legend-box span {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        #pieChartContainer {
+            max-width: 400px;
+            margin-top: 30px;
+        }
+        .cardInfor {
+            
+            display: flex;
+            flex-direction: row;
+            gap: 40px; /* المسافة بين الأقسام */
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap; /* يدعم الشاشات الصغيرة */
+            margin-top: 30px;
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            color: black;
+        }
+
+        .Information, .PieIformation {
+            min-width: 400px;
+            text-align: left
+        }
+
+    </style>
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="backgroundCardImportClass">
+    <h1>Crop Classification Result</h1>
+
+    {% if classification_map %}
+        <img src="{{ url_for('static', filename=classification_map) }}" alt="Classification Map"
+             style="max-width:100%; border: 2px solid green; margin-bottom: 20px;">
+    {% else %}
+        <p>Please upload a TIF image to classify.</p>
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="image" accept=".tif,.tiff" required>
+        <button type="submit">Classify</button>
+    </form>
+
+    {% if classification_map %}
+       <div class="cardInfor">
+         <div class="Information">
+            <h3>📈 Classification Result:</h3>
+            <p><strong>Dominant Crop:</strong> {{ main_crop }}</p>
+            <ul>
+                {% for crop, percent in percentages.items() %}
+                    <li> 🌿 {{ crop }}: {{ percent }}%</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+
+
+
+
+
+       <div class="PieIformation">
+            <div id="pieChartContainer">
+                <canvas id="cropPieChart"></canvas>
+            </div>
+       </div>
+       
+
+
+       
+
+       </div>
+        <script>
+            const percentages = {{ percentages|tojson }};
+            
+            // ترتيب ثابت للمحاصيل
+           const cropLabels = ['Vegetables', 'Wheat', 'Barley', 'Unknown'];
+        const cropColors = {
+            'Vegetables': '#00FF00',
+            'Wheat': '#FFFF00',
+            'Barley': '#FF0000',
+            'Unknown': '#000000'
+        };
+            // تحضير البيانات حسب الترتيب الثابت
+            const dataValues = cropLabels.map(label => percentages[label] || 0);
+            const dataColors = cropLabels.map(label => cropColors[label]);
+
+            const ctx = document.getElementById('cropPieChart').getContext('2d');
+            const cropPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: cropLabels,
+                    datasets: [{
+                        data: dataValues,
+                        backgroundColor: dataColors,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: 'black'
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.parsed}%`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
+
+    {% endif %}
+</body>
+</html>

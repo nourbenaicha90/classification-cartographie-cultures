@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Segmentation Result</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f7fa;
+        }
+
+        .backgroundCardImportClass {
+            background-image: url('/static/Img/img_bg.png');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #0da62c;
+            font-size: 32px;
+        }
+
+        form {
+            background-color: #ffffffcc;
+            padding: 25px 35px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease-in-out;
+        }
+
+        input[type="file"] {
+            margin-bottom: 15px;
+            padding: 8px;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        button {
+            background-color: #4aa0ff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #368de2;
+        }
+
+        .card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            max-width: 500px;
+            margin-top: 30px;
+            text-align: center;
+            width: 100%;
+        }
+
+        .card h2 {
+            color: #2c3e50;
+
+        }
+
+        .imageSegmentation {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            border-radius: 10px;
+         
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+
+        .imageSegmentation:hover {
+            transform: scale(1.03);
+        }
+
+        .error {
+            color: #e74c3c;
+            background: #fdecea;
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            max-width: 500px;
+            text-align: center;
+        }
+        .upload-form {
+    background-color: #ffffffcc;
+    padding: 25px 35px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease-in-out;
+}
+
+.upload-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+    font-size: 16px;
+}
+
+input[type="file"] {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    width: 100%;
+    background-color: #f9f9f9;
+    font-size: 14px;
+    cursor: pointer;
+    transition: border 0.3s;
+}
+
+input[type="file"]:hover {
+    border-color: #0da62c;
+}
+
+button {
+    background-color: #0da62c;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #0b8f26;
+}
+
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 26px;
+            }
+
+            form,
+            .card {
+                padding: 20px;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body class="backgroundCardImportClass">
+
+    <h1>Image Segmentation</h1>
+
+   <form method="POST" action="/segment" enctype="multipart/form-data" class="upload-form">
+        <label for="image-upload" class="upload-label">Choose an image</label>
+        <input type="file" id="image-upload" name="image" accept="image/*" required>
+        <button type="submit">Upload & Segment</button>
+    </form>
+
+
+    {% if result %}
+    <div class="card">
+        <h2>Result</h2>
+        <img src="data:image/png;base64,{{ result }}" alt="Segmented Image" class="imageSegmentation">
+        <p style="margin-top: 15px; font-weight: 600;">
+            🟩 Agricultural: {{ percentage }}% &nbsp;&nbsp; 🟦 Non-Agricultural: {{ 100 - percentage }}%
+        </p>
+    </div>
+    {% endif %}
+
+    {% if error %}
+    <p class="error">{{ error }}</p>
+    {% endif %}
+
+</body>
+</html>
