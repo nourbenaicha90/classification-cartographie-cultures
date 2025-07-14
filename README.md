@@ -80,6 +80,7 @@ Source: EuroSAT (Sentinel-2)
 Used both RGB and Multispectral (.tif) formats
 
 🔍 Screenshots
+
 | Platform Pages                    | Description                  |
 | --------------------------------- | ---------------------------- |
 | ![Home](assets/homepage.png)      | Main dashboard               |
@@ -87,9 +88,11 @@ Used both RGB and Multispectral (.tif) formats
 | ![Prediction](assets/predict.png) | Crop suitability predictions |
 
 📜 License
+
 This project is open source and available under the MIT License.
 
 🙌 Acknowledgments
+
 Supervised by: Dr. Said Labed
 
 Supported by: Algerian Space Agency (ASAL) and University Constantine 2
@@ -97,16 +100,22 @@ Supported by: Algerian Space Agency (ASAL) and University Constantine 2
 Developed by: Nour Elyakine Ben Aicha & Hamla Ferial
 
 [Classification_and_mappig_of_agricultural_crops_Using_satellite_images_and_machine_learning_algorithms.pdf](https://github.com/user-attachments/files/21212080/Classification_and_mappig_of_agricultural_crops_Using_satellite_images_and_machine_learning_algorithms.pdf)
+
+
 Home Page
+
 ![Home Page](https://github.com/user-attachments/assets/6ba19f28-c32a-441c-abfd-102f13dec053)
 
-main Page
+Main Page
+
 ![main Page](https://github.com/user-attachments/assets/addee02c-396e-43cc-a6d8-09656ba24acb)
 
 Predict Class
+
 ![Predict Class](https://github.com/user-attachments/assets/ccfaece2-8d42-4b87-9da6-692e45b01b16)
 
 Crop Classification
+
 ![Crop Classification](https://github.com/user-attachments/assets/cd9cb4db-6c19-46fb-8253-db107b8d368c)
 
 Vegetation Analysis
@@ -114,6 +123,7 @@ Vegetation Analysis
 ![Vegetation Analysis](https://github.com/user-attachments/assets/b050d478-7d45-4144-a44b-6a31f6bdf5c2)
 
 Segment Image
+
 ![Segment Image](https://github.com/user-attachments/assets/47d696eb-6ad9-42cd-9b4d-ec8987ffd1aa)
 
 "You can send me a message if you need anything. Thank you!"
