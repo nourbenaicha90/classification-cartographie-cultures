@@ -11,7 +11,9 @@ This platform is a complete system for analyzing and classifying agricultural la
 - Segment images into homogeneous regions to improve analysis.
 
 - Provide a user-friendly web platform for visualization and prediction.
+  
 📁 Project Structure
+
 <img width="887" height="351" alt="image" src="https://github.com/user-attachments/assets/bad89d28-db95-4dc7-b371-85f0450d9801" />
 
 🧠 Technologies Used
