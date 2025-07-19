@@ -99,7 +99,6 @@ Supervised by: Dr. Said Labed
 
 Supported by: Algerian Space Agency (ASAL) and University Constantine 2
 
-Developed by: Nour Elyakine Ben Aicha & Hamla Ferial
 
 [Classification_and_mappig_of_agricultural_crops_Using_satellite_images_and_machine_learning_algorithms.pdf](https://github.com/user-attachments/files/21212080/Classification_and_mappig_of_agricultural_crops_Using_satellite_images_and_machine_learning_algorithms.pdf)
 
